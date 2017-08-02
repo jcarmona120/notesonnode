@@ -1,17 +1,11 @@
-console.log('Starting notes.js');
-
 const fs = require('fs');
 
 var fetchNotes = () => {
 	try  {
-
 		var noteString = fs.readFileSync('notes-data.json');
 		return JSON.parse(noteString)
-
 	} catch (e) {
-
 		return [];
-
 	}
 }
 
@@ -53,7 +47,6 @@ var removeNote = (title) => {
 }
 
 var logNote = (note) => {
-	console.log('Note created')
   	console.log('---')
   	console.log(`Title: ${note.title}`)
   	console.log(`Body: ${note.body}`)
@@ -62,7 +55,6 @@ var logNote = (note) => {
 module.exports = {
 	// addNote: addNote
 	 addNote,
-	 // getAll: getAll
 	 getAll,
 	 getNote,
 	 removeNote,
