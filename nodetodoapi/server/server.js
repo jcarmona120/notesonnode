@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 
 
 var { mongoose, validator } = require('./db/mongoose')
-var { Todo } = require('./models/todos')
+var { Todo } = require('./models/todo')
 var { User} = require('./models/users')
 
 var app = express()
@@ -26,3 +26,7 @@ app.post('/todos', (req, res) => {
 app.listen(3000, () => {
 	console.log('Go to 3000!')
 })
+
+module.exports = {
+	app
+}
