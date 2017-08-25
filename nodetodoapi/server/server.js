@@ -1,10 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 
-
 var { mongoose, validator } = require('./db/mongoose')
 var { Todo } = require('./models/todo')
-var { User} = require('./models/users')
+var { User} = require('./models/user')
+const { ObjectID } = require('mongodb')
 
 var app = express()
 
@@ -16,6 +16,26 @@ app.get('/todos', (req, res) => {
 	}, (e) => {
 		res.status(400).send(e)
 	})
+})
+
+app.get('/todos/:id', (req, res) => {
+	var id = req.params.id;
+
+	// Valid id using isValid
+		// 404 - send back empty send
+	
+	if (!ObjectID.isValid(id)) {
+	 	return res.status(404).send('sorry. that is not an id playa.')
+	} 
+
+	//findByid
+
+	Todo.findById(id).then((todo) => {
+		if (!todo) {
+			return res.status(404).send()
+		}
+		res.status(200).send({todo})
+	}).catch((e) => res.status(404).send('not found playa'))
 })
 
 app.post('/todos', (req, res) => {
